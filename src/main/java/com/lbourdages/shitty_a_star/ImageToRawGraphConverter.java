@@ -23,11 +23,11 @@ public class ImageToRawGraphConverter {
   public static Graph<TileState> readImage(File imageFile) throws IOException {
     BufferedImage bufferedImage = ImageIO.read(imageFile);
     Graph<TileState> graph = new Graph<>(bufferedImage.getWidth(), bufferedImage.getHeight(), TileState.EMPTY);
-
+    int ySize = bufferedImage.getHeight();
 
     for (int x = 0; x < bufferedImage.getWidth(); x++) {
       for (int y = 0; y < bufferedImage.getHeight(); y++) {
-        graph.getNode(new Point(x, y)).setValue(getTileStateFromRGB(bufferedImage.getRGB(x, y)));
+        graph.getNode(new Point(x, y)).setValue(getTileStateFromRGB(bufferedImage.getRGB(x, ySize - y - 1)));
       }
     }
 

@@ -20,6 +20,10 @@ public class Point {
     return y;
   }
 
+  public int manhattanDistance(Point other) {
+    return Math.abs(other.getX() - x) + Math.abs(other.getY() - y);
+  }
+
   @Override
   public String toString() {
     return "Point (" + x + ',' + y + ")";

@@ -23,11 +23,11 @@ public class ImageToRawMapConverter {
   public static Container2D<TileState> readImage(File imageFile) throws IOException {
     BufferedImage bufferedImage = ImageIO.read(imageFile);
     Container2D<TileState> rawMap = new List2D<>(bufferedImage.getWidth(), bufferedImage.getHeight(), TileState.EMPTY);
-
+    int ySize = bufferedImage.getHeight();
 
     for (int x = 0; x < bufferedImage.getWidth(); x++) {
       for (int y = 0; y < bufferedImage.getHeight(); y++) {
-        rawMap.set(x, y, getTileStateFromRGB(bufferedImage.getRGB(x, y)));
+        rawMap.set(x, y, getTileStateFromRGB(bufferedImage.getRGB(x, ySize - y)));
       }
     }
 

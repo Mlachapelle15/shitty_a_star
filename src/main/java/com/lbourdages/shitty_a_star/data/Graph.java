@@ -4,7 +4,6 @@
 package com.lbourdages.shitty_a_star.data;
 
 import java.lang.reflect.Array;
-import java.util.Set;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Sets;
@@ -39,13 +38,12 @@ public class Graph<T> {
   private void setNeighboursOfNewlyCreatedNode(Node<T> node) {
     int x = node.getCoordinate().getX();
     int y = node.getCoordinate().getY();
-    Set<Node<T>> neighbours = Sets.newHashSet();
     //Let's start by the corner cases
     if (x != 0) {
       node.addNeighbour(nodes[x - 1][y]);
     }
     if (y != 0) {
-      neighbours.add(nodes[x][y - 1]);
+      node.addNeighbour(nodes[x][y - 1]);
     }
   }
 
@@ -64,7 +62,7 @@ public class Graph<T> {
   @Override
   public String toString() {
     String output = Strings.repeat("-", xSize + 2) + "\n";
-    for (int y = 0; y < ySize; y++) {
+    for (int y = ySize-1; y >= 0; y--) {
       output = output + "|";
       for (int x = 0; x < xSize; x++) {
         output = output + nodes[x][y].toString();

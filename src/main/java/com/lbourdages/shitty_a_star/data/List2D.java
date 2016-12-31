@@ -39,7 +39,7 @@ public class List2D<T> implements Container2D<T> {
   @Override
   public String toString() {
     String output = Strings.repeat("-", xSize + 2) + "\n";
-    for (int y = 0; y < ySize; y++) {
+    for (int y = ySize - 1; y >= 0; y--) {
       output = output + "|";
       for (int x = 0; x < xSize; x++) {
         output = output + listOfColumns.get(x).get(y).toString();
