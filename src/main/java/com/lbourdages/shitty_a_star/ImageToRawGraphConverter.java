@@ -1,7 +1,7 @@
 /**
  *Copyright (c) 2016 - 2016, Louis Bourdages
  */
-package com.lbourdages.shitty_a_star.map;
+package com.lbourdages.shitty_a_star;
 
 import javax.imageio.ImageIO;
 
@@ -9,28 +9,29 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-import com.lbourdages.shitty_a_star.data.Container2D;
-import com.lbourdages.shitty_a_star.data.List2D;
+import com.lbourdages.shitty_a_star.data.Graph;
+import com.lbourdages.shitty_a_star.data.Point;
+import com.lbourdages.shitty_a_star.map.TileState;
 
-public class ImageToRawMapConverter {
+public class ImageToRawGraphConverter {
 
   private static final int BLACK = -16777216;
   private static final int RED = -65536;
   private static final int GREEN = -16711936;
   private static final int WHITE = -1;
 
-  public static Container2D<TileState> readImage(File imageFile) throws IOException {
+  public static Graph<TileState> readImage(File imageFile) throws IOException {
     BufferedImage bufferedImage = ImageIO.read(imageFile);
-    Container2D<TileState> rawMap = new List2D<>(bufferedImage.getWidth(), bufferedImage.getHeight(), TileState.EMPTY);
+    Graph<TileState> graph = new Graph<>(bufferedImage.getWidth(), bufferedImage.getHeight(), TileState.EMPTY);
 
 
     for (int x = 0; x < bufferedImage.getWidth(); x++) {
       for (int y = 0; y < bufferedImage.getHeight(); y++) {
-        rawMap.set(x, y, getTileStateFromRGB(bufferedImage.getRGB(x, y)));
+        graph.getNode(new Point(x, y)).setValue(getTileStateFromRGB(bufferedImage.getRGB(x, y)));
       }
     }
 
-    return rawMap;
+    return graph;
   }
 
   private static TileState getTileStateFromRGB(int RGB) {
