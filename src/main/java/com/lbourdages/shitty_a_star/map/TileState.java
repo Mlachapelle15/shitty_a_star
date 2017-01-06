@@ -8,7 +8,8 @@ public enum TileState {
   OBSTACLE("X"),
   GOAL("G"),
   START("S"),
-  PATH("P");
+  LOUIS("L"),
+  MAX("M");
 
   private String printableValue;
 
